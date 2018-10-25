@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace Balda
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            var d = new WordsDictionaryFromFile(@"..\..\..\Dictionary\word_rus.txt", true);
+            bool s = d.Contain("Шлих");
         }
     }
 }
