@@ -79,7 +79,20 @@ namespace Balda
             return str.ToString();
         }
 
-        public IWordBuffer Clone() =>
-            new BaldaWordBuffer(_word);
+        public object Clone()
+        {
+            //var newWord = new Letter[_word.Count];
+            //for (int i = 0; i < newWord.Length; ++i)
+            //{
+            //    newWord[i] = (Letter)_word[i].Clone();
+            //}
+            //return new BaldaWordBuffer(newWord);
+            return new BaldaWordBuffer(_word);
+        }
+
+        public int CompareTo(object obj)
+        {
+            return this.ToString().CompareTo(obj.ToString());
+        }
     }
 }

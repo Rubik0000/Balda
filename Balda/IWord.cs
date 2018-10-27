@@ -9,7 +9,7 @@ namespace Balda
     /// <summary>
     /// An interface to create a word
     /// </summary>
-    interface IWordBuffer : IEnumerable<Letter>
+    interface IWordBuffer : IEnumerable<Letter>, ICloneable, IComparable
     {
         /// <summary>
         /// The length of the word
@@ -30,6 +30,6 @@ namespace Balda
         /// <returns></returns>
         bool Remove(Letter lett);
 
-        IWordBuffer Clone();
+        //IWordBuffer Clone();
     }
 }

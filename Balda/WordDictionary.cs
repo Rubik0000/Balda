@@ -13,8 +13,8 @@ namespace Balda
     class WordsDictionaryFromFile : IWordsDictionary
     {
         /// <summary>A list of words</summary>
-        private List<string> _dict;
-
+        //private List<string> _dict;
+        private HashSet<string> _dict;
         /// <summary>
         /// Construtor creates a dictionary from a text file
         /// set 'isSorted' to true if you are sure that the file is sorted
@@ -24,8 +24,8 @@ namespace Balda
         public WordsDictionaryFromFile(string filePath, bool isSorted = false)
         {
             var words = GetFileText(filePath);
-            _dict = new List<string>(words);
-            if (!isSorted) _dict.Sort();
+            _dict = new HashSet<string>(words);
+            //if (!isSorted) _dict.Sort();
         }
 
         /// <summary>
@@ -47,7 +47,8 @@ namespace Balda
         /// <summary>
         /// <see cref="IWordsDictionary.Contain(string)"/>
         /// </summary>        
-        public bool Contain(string word) =>        
-            _dict.BinarySearch(word.ToLower()) >= 0;        
+        public bool Contain(string word) =>
+            //_dict.BinarySearch(word.ToLower()) >= 0;       
+            _dict.Contains(word.ToLower());
     }
 }

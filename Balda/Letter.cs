@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Balda
 {
-    class Letter
+    class Letter : ICloneable
     {
         static public char EmptyCharacter { get; private set; } = '\0';
 
-        public char Character { get; set; }
+        public char Character { get; private set; }
 
-        public int RowInd { get; set; }
+        public int RowInd { get; private set; }
 
-        public int ColInd { get; set; }
+        public int ColInd { get; private set; }
 
         public bool Looked { get; set; } = false;
 
@@ -26,6 +26,9 @@ namespace Balda
         }
 
         public bool HasSameIndexes(Letter let) =>
-            this.RowInd == let.RowInd && this.ColInd == let.ColInd;       
+            this.RowInd == let.RowInd && this.ColInd == let.ColInd;
+
+        public object Clone() =>
+            new Letter(this.Character, this.RowInd, this.ColInd);
     }
 }
