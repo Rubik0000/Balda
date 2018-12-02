@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Balda.cs" />
     <Compile Include="BaldaGame.cs" />
     <Compile Include="IBaldaGame.cs" />
     <Compile Include="ILettersSet.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RusLetters.cs" />
+    <Compile Include="TrieTree.cs" />
     <Compile Include="WordBuffer.cs" />
     <Compile Include="WordDictionary.cs" />
     <EmbeddedResource Include="MainForm.resx">

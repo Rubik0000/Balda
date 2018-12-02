@@ -11,5 +11,7 @@ namespace Balda
         char this[int ind] { get; }
 
         int Count { get; }
+
+        int GetIndex(char lett);
     }
 }

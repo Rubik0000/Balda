@@ -40,5 +40,18 @@ namespace Balda
 
         IEnumerator IEnumerable.GetEnumerator() =>
             GetEnumerator();
+
+        public int GetIndex(char lett)
+        {
+            if (lett == 'ё')
+                return 'е' - 'а';
+            int ind = lett - 'а';
+            return ind >= 0 && ind < count ? ind : -1;
+            //if (lett == 'ё')
+            //{
+            //    return Array.FindIndex(_rusLetts, let => let == 'е');
+            //}
+            //return Array.FindIndex(_rusLetts, let => let == lett);
+        }
     }
 }
