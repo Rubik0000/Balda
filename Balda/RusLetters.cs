@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Balda
 {
+    /// <summary>
+    /// The russian alphabet
+    /// This is a singltone
+    /// </summary>
     class RusLetters : ILettersSet
     {
         static private int count = 32;
@@ -47,11 +51,6 @@ namespace Balda
                 return 'е' - 'а';
             int ind = lett - 'а';
             return ind >= 0 && ind < count ? ind : -1;
-            //if (lett == 'ё')
-            //{
-            //    return Array.FindIndex(_rusLetts, let => let == 'е');
-            //}
-            //return Array.FindIndex(_rusLetts, let => let == lett);
         }
     }
 }

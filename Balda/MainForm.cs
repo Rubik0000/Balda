@@ -13,47 +13,59 @@ namespace Balda
 {
     public partial class MainForm : Form
     {
+        /// <summary>The file with dictionary</summary>
+        private String fileName = @"..\..\..\Dictionary\word_rus.txt";
+       
+        private Balda _balda;
+
         public MainForm()
         {
             InitializeComponent();
+            _balda = new Balda(RusLetters.Instance);
+            _balda.FeelDictionary(fileName);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            var commonTrie = new TrieTree(RusLetters.Instance);
-            var revTrie = new TrieTree(RusLetters.Instance);
-
-            var b = new Balda(RusLetters.Instance, 3);
-            b.FeelDictionary(@"..\..\..\Dictionary\word_rus.txt");
-            b.SetWord("бал");
-            var words = b.FindWords(4);
-
-            //FeelTrees(commonTrie, revTrie, @"..\..\..\Dictionary\word_rus.txt");
-            //trie.LoadFromFile(@"..\..\..\Dictionary\word_rus.txt");
-            //bool found = commonTrie.Find("буклет");
-            var d = new WordsDictionaryFromFile(@"..\..\..\Dictionary\word_rus.txt", true);            
-            var b1 = new BaldaGame("балда", d, RusLetters.Instance);
-            //b._matr[1, 1] = new Letter('р', 1, 1);
-            //var s = b.FindWords(1, 1);            
-            var ls = b1.GetWordsOnStep(1);
-            //b.GetWordsOnStepRec(1, 1, ls);
-        }
-
-        private void FeelTrees(TrieTree normal, TrieTree inverted, string fileName)
-        {
-            using (var reader = new StreamReader(fileName))
+        /// <summary>
+        /// Event handler on find words
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnFind_Click(object sender, EventArgs e)
+        {            
+            string initialWord =
+                txtBxLett1.Text +
+                txtBxLett2.Text +
+                txtBxLett3.Text +
+                txtBxLett4.Text +
+                txtBxLett5.Text;
+            _balda.SetWord(initialWord.ToLower());
+            int step = Convert.ToInt32(nmrcStep.Value);
+            var wordsByLvl = _balda.FindWords(step);
+            var str = new StringBuilder();
+            int count = 1;
+            foreach(var words in wordsByLvl)
             {
-                while (!reader.EndOfStream)
+                str.Append("Шаг: " + count++ + "\r\n");
+                str.Append("---------------------------------\r\n");
+                foreach (var wrd in words)
                 {
-                    var word = reader.ReadLine().Replace("\n", "");
-                    normal.Add(word);
-                    for (int i = 0; i < word.Length; ++i)
-                    {
-                        string subStr = word.Substring(0, word.Length - i);
-                        string reversed = new string(subStr.Reverse().ToArray());
-                        inverted.Add(reversed);
-                    }
+                    str.Append(wrd + "\r\n");
                 }
+            }
+            txtBxFoundWords.Text = str.ToString();
+        }
+
+        /// <summary>
+        /// Event handler on text change in textBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtBx_TextChanged(object sender, EventArgs e)
+        {
+            var txtBx = (TextBox)sender;
+            if (txtBx.Text.Length > 1)
+            {
+                txtBx.Text = txtBx.Text[0].ToString();
             }
         }
     }
